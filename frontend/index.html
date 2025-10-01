@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Quiz Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🧠 AI Quiz Generator</h1>
+            <p>Generate personalized quizzes on any topic using AI</p>
+        </header>
+
+        <main>
+            <!-- Popular Topics Section -->
+            <div id="popular-topics" class="quiz-section">
+                <div class="popular-topics-container">
+                    <h2>🔥 Popular Quiz Topics</h2>
+                    <div id="topics-list" class="topics-grid">
+                        <!-- Popular topics will be loaded here -->
+                    </div>
+                    <button id="refresh-topics" class="refresh-btn">🔄 Refresh</button>
+                </div>
+            </div>
+
+            <!-- Quiz Setup Form -->
+            <div id="quiz-setup" class="quiz-section">
+                <div class="setup-form">
+                    <h2>Create Your Quiz</h2>
+                    <form id="quiz-form">
+                        <div class="form-group">
+                            <label for="topic">Topic:</label>
+                            <input type="text" id="topic" placeholder="e.g., JavaScript, World History, Biology"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="difficulty">Difficulty:</label>
+                            <select id="difficulty">
+                                <option value="easy">Easy</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="question-count">Number of Questions:</label>
+                            <select id="question-count">
+                                <option value="3">3 Questions</option>
+                                <option value="5" selected>5 Questions</option>
+                                <option value="10">10 Questions</option>
+                                <option value="15">15 Questions</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" id="generate-btn">
+                            <span class="btn-text">Generate Quiz</span>
+                            <span class="btn-loading" style="display: none;">Generating...</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Quiz Taking Interface -->
+            <div id="quiz-taking" class="quiz-section" style="display: none;">
+                <div class="quiz-header">
+                    <h2 id="quiz-topic">Quiz Topic</h2>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                        <span class="progress-text" id="progress-text">Question 1 of 5</span>
+                    </div>
+                </div>
+
+                <div class="question-container">
+                    <div class="question" id="question-text">Loading question...</div>
+                    <div class="options" id="options-container">
+                        <!-- Options will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="quiz-actions">
+                    <button id="submit-answer" disabled>Submit Answer</button>
+                    <button id="next-question" style="display: none;">Next Question</button>
+                </div>
+            </div>
+
+            <!-- Quiz Results -->
+            <div id="quiz-results" class="quiz-section" style="display: none;">
+                <div class="results-container">
+                    <h2>Quiz Complete! 🎉</h2>
+                    <div class="score-display">
+                        <div class="score-circle">
+                            <span id="final-score">0</span>/<span id="total-questions">0</span>
+                        </div>
+                        <div class="score-percentage" id="score-percentage">0%</div>
+                    </div>
+
+                    <div class="results-summary">
+                        <p id="results-message">Great job!</p>
+                        <p id="time-spent">Time taken: 0 minutes</p>
+                    </div>
+
+                    <div class="detailed-results" id="detailed-results">
+                        <!-- Detailed results will be populated by JavaScript -->
+                    </div>
+
+                    <button id="new-quiz-btn">Take Another Quiz</button>
+                </div>
+            </div>
+
+            <!-- Loading and Error States -->
+            <div id="loading" class="loading-section" style="display: none;">
+                <div class="spinner"></div>
+                <p>Generating your quiz...</p>
+            </div>
+
+            <div id="error" class="error-section" style="display: none;">
+                <div class="error-icon">⚠️</div>
+                <p id="error-message">Something went wrong</p>
+                <button id="retry-btn">Try Again</button>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by Cloudflare Workers AI & Llama 3.3</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

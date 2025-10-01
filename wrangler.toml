@@ -1,0 +1,27 @@
+name = "ai-quiz-app"
+main = "src/index.js"
+compatibility_date = "2024-01-15"
+
+# Workers AI binding for Llama 3.3
+[ai]
+binding = "AI"
+
+# KV namespace for storing quiz data
+[[kv_namespaces]]
+binding = "QUIZ_KV"
+id = "32a2568d71964266b2dcf599366f2742"
+
+# Durable Objects for quiz sessions
+[durable_objects]
+bindings = [
+  { name = "QUIZ_SESSION", class_name = "QuizSession" }
+]
+
+# Durable Objects migrations
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = [ "QuizSession" ]
+
+# Environment variables (set these in Cloudflare dashboard)
+[vars]
+ENVIRONMENT = "production"
